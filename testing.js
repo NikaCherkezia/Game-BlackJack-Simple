@@ -32,13 +32,12 @@ let dealer = {
 
 let playerEl = document.getElementById("player-el");
 playerEl.textContent = player.name + ": $" + player.chips;
+
 //Random card creator
 
 function getRandomCard() {
     return Math.floor((Math.random() * 10 ) + 2 );
 }
-
-
 
 function startGame() {
     isAlive = true;
@@ -55,7 +54,6 @@ function startGame() {
 
     dealerCards = [dealersFirstCard, dealersSecondCard];
     dealerSum = dealersFirstCard + dealersSecondCard;
-
     
     renderGame();
 }
@@ -63,7 +61,7 @@ function startGame() {
 function renderGame(){
     let textForShowingCards = "Your Cards: ";
 
-    let textForShowingDealersCards = "Dealer's Cards: "
+    let textForShowingDealersCards = "Dealer's Cards: ";
     
     for (let i = 0; i < dealerCards.length; i++) {
         textForShowingDealersCards += dealerCards[i] + " ";
@@ -81,16 +79,12 @@ function renderGame(){
 
     if (sum < 21 && dealerSum < 21 && dealerSum >= sum) {
         message.textContent = "Would you like to draw a new card?";
-        isAlive = true;
-        dealerIsAlive = true;
-        hasBlackjack = false;
-        dealerHasBlackjack = false;
+        
         
     } else if (sum === 21) {
         message.textContent = "You've got a Blackjack!";
         hasBlackjack = true;
-        dealerHasBlackjack = false;
-        
+                
     } else if (sum < 21 && dealerSum > 21) {
         message.textContent = "You've won!"
         dealerIsAlive = false;
@@ -104,9 +98,11 @@ function renderGame(){
         isAlive = false;
     }
     else {
-         message.textContent = "Would you like to draw a new card?";
-         isAlive = true;
-         dealerIsAlive = true;
+        message.textContent = "Would you like to draw a new card ha?";
+        isAlive = true;
+        dealerIsAlive = true;
+        hasBlackjack = false;
+        dealerHasBlackjack = false;
          
     }
 
@@ -125,17 +121,20 @@ function newCard() {
         }
         let displayDealersNewCard = getRandomCard();
         sum += displayNewCard;
-        dealerSum += displayDealersNewCard;
+        
         
         if (dealerSum < sum && sum < 21) {
             
             dealerCards.push(displayDealersNewCard);
+            dealerSum += displayDealersNewCard;
             
         } else {
-           dealerSum = dealerSum - displayDealersNewCard;
+            dealerCards = dealerCards;
+            dealerSum = dealerSum;
            
         }
         
+
         cards.push(displayNewCard);
 
         renderGame();
